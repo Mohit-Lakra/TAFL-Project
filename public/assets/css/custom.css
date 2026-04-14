@@ -1,0 +1,37 @@
+::selection {
+  background-color: rgba(56, 189, 248, 0.35);
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.palette-btn {
+  background-color: rgba(2, 6, 23, 0.9);
+  border: 1px solid rgba(30, 41, 59, 0.85);
+  border-radius: 0.75rem;
+  padding: 0.25rem 0;
+  color: rgb(226, 232, 240);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 150ms ease;
+}
+
+.palette-btn:hover {
+  border-color: rgb(14, 165, 233);
+  color: rgb(125, 211, 252);
+}
+
+.scroll-panel {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+}
+
+.scroll-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-panel::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.4);
+  border-radius: 999px;
+}
