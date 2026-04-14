@@ -197,3 +197,6 @@ analyzeBtn.addEventListener('click', () => {
 if (generateExampleBtn) {
   generateExampleBtn.addEventListener('click', loadRandomExample);
 }
+
+// Kick off with the pre-loaded example in the inputs.
+safeAnalyze();
