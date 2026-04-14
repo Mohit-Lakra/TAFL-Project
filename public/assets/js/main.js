@@ -23,6 +23,10 @@ const paletteButtons = document.querySelectorAll('.palette-btn');
 const progressTicker = document.getElementById('progressTicker');
 const progressLabel = document.getElementById('progressLabel');
 const progressMeta = document.getElementById('progressMeta');
+const progressStack = document.getElementById('progressStack');
+
+const STACK_LEVEL_COUNT = 9;
+let stackSegments = [];
 
 let activeInput = regex1Input;
 
@@ -57,6 +61,49 @@ function disableAnalyze(disabled) {
   }
 }
 
+function buildStackSegments(count) {
+  if (!progressStack) return;
+  progressStack.innerHTML = '';
+  stackSegments = [];
+  for (let i = 0; i < count; i += 1) {
+    const segment = document.createElement('div');
+    segment.className = 'stack-segment';
+    segment.dataset.index = i;
+    progressStack.appendChild(segment);
+    stackSegments.push(segment);
+  }
+}
+
+function resetStackSegments() {
+  stackSegments.forEach((segment) => {
+    segment.classList.remove('stack-active', 'stack-success', 'stack-fail');
+  });
+}
+
+function markStackProgress(length) {
+  if (!stackSegments.length || typeof length !== 'number') return;
+  stackSegments.forEach((segment, idx) => {
+    if (segment.classList.contains('stack-fail')) return;
+    segment.classList.remove('stack-active');
+    if (idx < length) {
+      segment.classList.add('stack-success');
+    } else if (idx > length) {
+      segment.classList.remove('stack-success');
+    }
+  });
+  if (stackSegments[length]) {
+    stackSegments[length].classList.add('stack-active');
+  }
+}
+
+function markStackResult(equivalent) {
+  if (!stackSegments.length) return;
+  stackSegments.forEach((segment) => {
+    segment.classList.remove('stack-active', 'stack-success', 'stack-fail');
+    segment.classList.add(equivalent ? 'stack-success' : 'stack-fail');
+  });
+}
+
 function setTickerIdle() {
   if (!progressTicker) return;
   progressTicker.classList.add('hidden');
@@ -64,12 +111,16 @@ function setTickerIdle() {
   progressMeta.textContent = 'Waiting for input';
 }
 
-function updateTicker(candidate, index, total) {
+function updateTicker(candidate, index, total, length = null) {
   if (!progressTicker) return;
   const symbol = candidate === '' ? 'ε' : candidate;
   progressTicker.classList.remove('hidden');
+  const lengthLabel = typeof length === 'number' ? `Length ${length} • ` : '';
   progressLabel.textContent = `Testing ${symbol}`;
-  progressMeta.textContent = `${index + 1} of ${total} strings`;
+  progressMeta.textContent = `${lengthLabel}${index + 1} of ${total} strings`;
+  if (typeof length === 'number') {
+    markStackProgress(length);
+  }
 }
 
 async function safeAnalyze() {
@@ -82,6 +133,8 @@ async function safeAnalyze() {
   }
 
   disableAnalyze(true);
+  setTickerIdle();
+  resetStackSegments();
 
   let ast1;
   let ast2;
@@ -90,6 +143,8 @@ async function safeAnalyze() {
     ast2 = new RegexParser(expr2).parse();
   } catch (error) {
     disableAnalyze(false);
+    setTickerIdle();
+    resetStackSegments();
     showAlert(alertBox, error.message);
     return;
   }
@@ -101,6 +156,8 @@ async function safeAnalyze() {
     renderStrings(strings2El, count2El, strings2);
   } catch (error) {
     disableAnalyze(false);
+    setTickerIdle();
+    resetStackSegments();
     showAlert(alertBox, `Generation error: ${error.message}`);
     return;
   }
@@ -108,9 +165,11 @@ async function safeAnalyze() {
   try {
     const verification = await verifyEquivalence(expr1, expr2, updateTicker);
     setTickerIdle();
+    markStackResult(verification.equivalent);
     updateStatus(statusCard, statusText, statusDetail, counterEl, verification);
   } catch (error) {
     setTickerIdle();
+    resetStackSegments();
     showAlert(alertBox, `Verification error: ${error.message}`);
   }
 
@@ -128,6 +187,8 @@ function loadRandomExample() {
   safeAnalyze();
 }
 
+buildStackSegments(STACK_LEVEL_COUNT);
+resetStackSegments();
 renderExampleList(exampleListEl, curatedExamples);
 setTickerIdle();
 analyzeBtn.addEventListener('click', () => {

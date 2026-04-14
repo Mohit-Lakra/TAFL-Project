@@ -39,7 +39,7 @@ TAFL-Project
 ## ✨ Experience Highlights
 - **Scholarly Interface** – a dark, minimalist dashboard with thoughtful typography, curated spacing, and status cards that feel lab-ready.
 - **Dual Perspectives** – review the strings each expression accepts while a dedicated status panel summarizes the verdict and counter-example.
-- **Animated Verification Ticker** – watch a pulse indicator stream through the bounded test suite so students can feel the checking process instead of it being a black box.
+- **Animated Verification Sweep** – a pulse ticker plus stack-by-stack length bars show exactly how the checker progresses, and everything flashes red the moment a mismatch appears.
 - **Curated Gallery** – six handpicked regex pairs (half equivalent, half not) for quick demonstrations via the “Generate Example” control.
 - **Storytelling Friendly** – descriptions stay plain-language so the app shines in lectures, demos, or self-study sessions alike.
 
