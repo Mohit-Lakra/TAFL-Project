@@ -20,6 +20,9 @@ const generateExampleBtn = document.getElementById('generateExample');
 const exampleListEl = document.getElementById('exampleList');
 const exampleNote = document.getElementById('exampleNote');
 const paletteButtons = document.querySelectorAll('.palette-btn');
+const progressTicker = document.getElementById('progressTicker');
+const progressLabel = document.getElementById('progressLabel');
+const progressMeta = document.getElementById('progressMeta');
 
 let activeInput = regex1Input;
 
@@ -45,7 +48,31 @@ paletteButtons.forEach((btn) => {
   });
 });
 
-function safeAnalyze() {
+function disableAnalyze(disabled) {
+  analyzeBtn.disabled = disabled;
+  if (disabled) {
+    analyzeBtn.classList.add('opacity-60', 'cursor-not-allowed');
+  } else {
+    analyzeBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+  }
+}
+
+function setTickerIdle() {
+  if (!progressTicker) return;
+  progressTicker.classList.add('hidden');
+  progressLabel.textContent = 'Idle';
+  progressMeta.textContent = 'Waiting for input';
+}
+
+function updateTicker(candidate, index, total) {
+  if (!progressTicker) return;
+  const symbol = candidate === '' ? 'ε' : candidate;
+  progressTicker.classList.remove('hidden');
+  progressLabel.textContent = `Testing ${symbol}`;
+  progressMeta.textContent = `${index + 1} of ${total} strings`;
+}
+
+async function safeAnalyze() {
   clearAlert(alertBox);
   const expr1 = regex1Input.value.trim();
   const expr2 = regex2Input.value.trim();
@@ -53,30 +80,41 @@ function safeAnalyze() {
     showAlert(alertBox, 'Please provide both regular expressions before analyzing.');
     return;
   }
+
+  disableAnalyze(true);
+
   let ast1;
   let ast2;
   try {
     ast1 = new RegexParser(expr1).parse();
     ast2 = new RegexParser(expr2).parse();
   } catch (error) {
+    disableAnalyze(false);
     showAlert(alertBox, error.message);
     return;
   }
+
   try {
     const strings1 = generateStrings(ast1);
     const strings2 = generateStrings(ast2);
     renderStrings(strings1El, count1El, strings1);
     renderStrings(strings2El, count2El, strings2);
   } catch (error) {
+    disableAnalyze(false);
     showAlert(alertBox, `Generation error: ${error.message}`);
     return;
   }
+
   try {
-    const verification = verifyEquivalence(expr1, expr2);
+    const verification = await verifyEquivalence(expr1, expr2, updateTicker);
+    setTickerIdle();
     updateStatus(statusCard, statusText, statusDetail, counterEl, verification);
   } catch (error) {
+    setTickerIdle();
     showAlert(alertBox, `Verification error: ${error.message}`);
   }
+
+  disableAnalyze(false);
 }
 
 function loadRandomExample() {
@@ -91,7 +129,10 @@ function loadRandomExample() {
 }
 
 renderExampleList(exampleListEl, curatedExamples);
-analyzeBtn.addEventListener('click', safeAnalyze);
+setTickerIdle();
+analyzeBtn.addEventListener('click', () => {
+  safeAnalyze();
+});
 if (generateExampleBtn) {
   generateExampleBtn.addEventListener('click', loadRandomExample);
 }

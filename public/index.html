@@ -80,6 +80,13 @@
           <p class="text-xs uppercase tracking-[0.5em] text-slate-500">Status</p>
           <p id="statusText" class="text-2xl font-semibold text-slate-200">Awaiting analysis</p>
           <p id="statusDetail" class="text-sm text-slate-400">Provide both expressions and run the analyzer.</p>
+          <div id="progressTicker" class="analysis-ticker hidden">
+            <span class="pulse-dot"></span>
+            <div class="text-left">
+              <p id="progressLabel" class="text-sm font-semibold text-slate-200">Idle</p>
+              <p id="progressMeta" class="text-xs text-slate-500">Waiting for input</p>
+            </div>
+          </div>
         </div>
         <div class="border border-slate-800 rounded-2xl bg-slate-950/30 p-5 space-y-3">
           <p class="text-sm font-semibold text-slate-300">Counter-example (if any)</p>

@@ -2,53 +2,74 @@
 
 **Live Demo:** https://mohit-lakra.github.io/TAFL-Project/
 
-Imagine an Automata Theory studio that feels like a research-grade instrument yet stays playful enough for classroom demos. This project delivers exactly that: an academic-inspired interface where you can pit two regular expressions against each other, watch their accepted strings unfold, and immediately see whether they behave the same.
+A research-inspired Automata Theory studio for comparing two regular expressions, inspecting the strings they accept, and presenting counter-examples with academic polish.
 
-## Experience Highlights
-- **Scholarly Interface** – a dark, minimalist dashboard with thoughtful typography, curated spacing, and status cards that feel like they belong in a graduate lab.
-- **Dual Perspectives** – review the strings each expression accepts (organized by length) while a dedicated status panel summarizes the verdict and counter-example.
-- **Curated Gallery** – six handpicked regex pairs (half equivalent, half not) for instant demonstrations. Tap “Generate Example” to load one and start exploring.
-- **Storytelling Friendly** – changes are explained in plain language, making it easy to narrate what is happening whether you’re presenting to a class or working solo.
-
-## What You Can Explore
-- **Do these two expressions describe the same language?** The verdict card lights up with “EQUIVALENT” or “NOT EQUIVALENT,” along with the first string where they disagree.
-- **Which concrete strings do they accept?** Scrollable panels show everything the app can synthesize within a reasonable bound, displayed neatly with their lengths.
-- **How can I illustrate regex concepts quickly?** Use the curated examples to demonstrate common identities, pitfalls, or pattern contrasts without typing complex expressions repeatedly.
-
-## Using the App
-1. Open the live demo (or the local `index.html`) and enter two expressions using the alphabet `{a, b, ε}`.
-2. Lean on the calculator palette if you prefer buttons to typing; it inserts tokens at your current cursor position.
-3. Click **Analyze & Verify**. Within a blink, the generated strings appear, and the verdict card updates.
-4. Curious about classic scenarios? Press **Generate Example** and the interface will load one of the six curated cases, complete with descriptive text.
-
-## Example Scenarios (Built In)
-| Title | What it Demonstrates |
-|-------|----------------------|
-| Synchronous Blocks | Optional ε versus pure repetition when concatenating `ab` blocks. |
-| Optional Prefix | The difference between allowing an `a` up front or folding it into a union. |
-| All Binary Strings | Showing that nested stars can describe the same set as `(a|b)*`. |
-| Terminal Symbol Contrast | How ending in `a` versus ending in `b` affects acceptance. |
-| Order of Blocks | Exposing that `a*b*` and `b*a*` prefer different symbol orders. |
-| Alternating Patterns | Comparing `(ab)*` with `(ba)*` to show phase shifts. |
-
-## Why It Exists
-This app was designed for TAFL (Theory of Automata and Formal Languages) discussions where students often ask, “Are these two regexes actually the same?” Traditional proofs can feel abstract, so the goal was to provide an immediate, visually rich answer that sparks further curiosity. By seeing strings, counter-examples, and curated notes side by side, learners can bridge intuition and formal reasoning.
-
-## Getting Started Locally
-1. Clone the repository.
-2. Open `public/index.html` in any modern browser.
-3. Explore freely—there is nothing to build or install.
-
-## Project Layout
+## 📁 Repository Layout
 ```
 TAFL-Project
-├── public/
-│   ├── index.html                # Layout + Tailwind harness
-│   └── assets/
-│       ├── css/custom.css        # Additional polish (scrollbars, palette styling)
-│       └── js/                   # Organized ES modules for data + logic + UI helpers
-├── .github/workflows/pages.yml   # GitHub Pages deployment pipeline
-└── README.md                     # You are here
+├── README.md
+├── .github/
+│   └── workflows/
+│       └── pages.yml
+└── public/
+    ├── index.html
+    └── assets/
+        ├── css/
+        │   └── custom.css
+        ├── images/
+        │   ├── architecture.svg
+        │   └── ui-glimpse.svg
+        └── js/
+            ├── main.js
+            ├── components/
+            │   └── ui.js
+            ├── core/
+            │   ├── generator.js
+            │   ├── parser.js
+            │   └── verification.js
+            └── data/
+                └── examples.js
 ```
 
-Enjoy presenting, teaching, or simply geeking out about regular expressions with a tool that feels as elegant as the subject deserves.
+## 🎨 Visual Overview
+![Architecture Diagram](public/assets/images/architecture.svg)
+
+![Interface Glimpse](public/assets/images/ui-glimpse.svg)
+
+## ✨ Experience Highlights
+- **Scholarly Interface** – a dark, minimalist dashboard with thoughtful typography, curated spacing, and status cards that feel lab-ready.
+- **Dual Perspectives** – review the strings each expression accepts while a dedicated status panel summarizes the verdict and counter-example.
+- **Animated Verification Ticker** – watch a pulse indicator stream through the bounded test suite so students can feel the checking process instead of it being a black box.
+- **Curated Gallery** – six handpicked regex pairs (half equivalent, half not) for quick demonstrations via the “Generate Example” control.
+- **Storytelling Friendly** – descriptions stay plain-language so the app shines in lectures, demos, or self-study sessions alike.
+
+## 🔍 What You Can Explore
+- Do two expressions actually represent the same language? The verdict card answers instantly and shows the first witness string when they differ.
+- Which concrete strings does each regex admit? Scroll through generated lists (bounded to length 5) with lengths labeled and ε displayed explicitly.
+- Need a rapid illustration? Load a curated example to demonstrate optional prefixes, alternating patterns, or contrasting terminals.
+
+## 🚀 Using the App
+1. Open the [live demo](https://mohit-lakra.github.io/TAFL-Project/) or launch `public/index.html` locally.
+2. Enter expressions over `{a, b, ε}`; use the calculator palette to insert tokens without breaking concentration.
+3. Click **Analyze & Verify** to populate both string panels and receive the equivalence verdict.
+4. Curious for inspiration? Tap **Generate Example** to cycle through the built-in teaching set.
+
+## 📚 Built-in Example Stories
+| Title | Focus |
+|-------|-------|
+| Synchronous Blocks | Optional ε versus pure `(ab)*` repetition. |
+| Optional Prefix | Distinguishing a voluntary leading `a` from a combined union. |
+| All Binary Strings | Showing nested stars can match `(a|b)*`. |
+| Terminal Symbol Contrast | Highlighting the effect of ending in `a` vs `b`. |
+| Order of Blocks | Comparing `a*b*` with `b*a*` to discuss ordering. |
+| Alternating Patterns | Contrasting `(ab)*` and `(ba)*` phase shifts. |
+
+## 💡 Why It Exists
+In Theory of Automata classrooms, students often ask whether two elegant-looking regexes are secretly the same. Rather than wave hands, this tool reveals strings, counter-examples, and curated commentary side by side, helping bridge intuition and formal reasoning.
+
+## 🏁 Run It Locally
+1. `git clone https://github.com/<your-username>/TAFL-Project.git`
+2. `cd TAFL-Project`
+3. Open `public/index.html` in your browser – no build step required.
+
+Enjoy exploring regular languages with a tool that feels as elegant as the concepts it showcases.

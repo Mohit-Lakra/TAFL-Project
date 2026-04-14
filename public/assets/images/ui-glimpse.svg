@@ -1,0 +1,30 @@
+<svg width="900" height="420" viewBox="0 0 900 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="420" rx="26" fill="#020617" />
+  <text x="40" y="60" fill="#E0F2FE" font-size="20" font-family="'Inter',sans-serif">Interface at a Glance</text>
+  <rect x="40" y="90" width="240" height="280" rx="18" fill="#0F172A" stroke="#38BDF8" stroke-width="2" />
+  <rect x="320" y="90" width="240" height="280" rx="18" fill="#0F172A" stroke="#A78BFA" stroke-width="2" />
+  <rect x="600" y="90" width="240" height="280" rx="18" fill="#0F172A" stroke="#34D399" stroke-width="2" />
+  <text x="70" y="130" fill="#F8FAFC" font-size="16">Input & Palette</text>
+  <text x="70" y="155" fill="#94A3B8" font-size="12">Regex 1</text>
+  <rect x="70" y="165" width="180" height="24" rx="8" fill="#1E293B" />
+  <text x="70" y="205" fill="#94A3B8" font-size="12">Regex 2</text>
+  <rect x="70" y="215" width="180" height="24" rx="8" fill="#1E293B" />
+  <text x="70" y="255" fill="#94A3B8" font-size="12">Palette</text>
+  <g fill="#1E293B">
+    <rect x="70" y="265" width="26" height="26" rx="8" />
+    <rect x="100" y="265" width="26" height="26" rx="8" />
+    <rect x="130" y="265" width="26" height="26" rx="8" />
+    <rect x="160" y="265" width="26" height="26" rx="8" />
+    <rect x="190" y="265" width="26" height="26" rx="8" />
+    <rect x="70" y="295" width="26" height="26" rx="8" />
+    <rect x="100" y="295" width="26" height="26" rx="8" />
+  </g>
+  <text x="350" y="130" fill="#F8FAFC" font-size="16">Generated Strings</text>
+  <rect x="350" y="150" width="180" height="60" rx="12" fill="#1E293B" />
+  <rect x="350" y="220" width="180" height="60" rx="12" fill="#1E293B" />
+  <text x="630" y="130" fill="#F8FAFC" font-size="16">Verdict & Counterexample</text>
+  <rect x="630" y="150" width="180" height="80" rx="12" fill="#1E293B" />
+  <rect x="630" y="240" width="180" height="60" rx="12" fill="#1E293B" />
+  <text x="350" y="330" fill="#94A3B8" font-size="13">Strings sorted by length; ε shown explicitly.</text>
+  <text x="630" y="330" fill="#94A3B8" font-size="13">Status flips between green (equivalent) and rose (not).</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg width="900" height="360" viewBox="0 0 900 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="360" rx="26" fill="#020617" />
+  <text x="40" y="60" fill="#94A3B8" font-size="20" font-family="'Inter',sans-serif">TAFL Project Architecture</text>
+  <g>
+    <rect x="40" y="90" width="230" height="230" rx="20" fill="#0F172A" stroke="#38BDF8" stroke-width="2" />
+    <text x="60" y="130" fill="#F8FAFC" font-size="18" font-family="'Inter',sans-serif">UI Shell</text>
+    <text x="60" y="160" fill="#94A3B8" font-size="14" font-family="'Inter',sans-serif">public/index.html</text>
+    <text x="60" y="190" fill="#CBD5F5" font-size="13" font-family="'Inter',sans-serif">• Layout grid</text>
+    <text x="60" y="210" fill="#CBD5F5" font-size="13" font-family="'Inter',sans-serif">• Tailwind loader</text>
+    <text x="60" y="230" fill="#CBD5F5" font-size="13" font-family="'Inter',sans-serif">• Entry script tag</text>
+  </g>
+  <g>
+    <rect x="320" y="90" width="230" height="230" rx="20" fill="#0F172A" stroke="#34D399" stroke-width="2" />
+    <text x="340" y="130" fill="#F8FAFC" font-size="18" font-family="'Inter',sans-serif">Logic Core</text>
+    <text x="340" y="160" fill="#94A3B8" font-size="14" font-family="'Inter',sans-serif">public/assets/js/core/*</text>
+    <text x="340" y="190" fill="#CBD5F5" font-size="13" font-family="'Inter',sans-serif">• Parser (AST)</text>
+    <text x="340" y="210" fill="#CBD5F5" font-size="13" font-family="'Inter',sans-serif">• Generator (≤5)</text>
+    <text x="340" y="230" fill="#CBD5F5" font-size="13" font-family="'Inter',sans-serif">• Verifier (≤8)</text>
+  </g>
+  <g>
+    <rect x="600" y="90" width="260" height="230" rx="20" fill="#0F172A" stroke="#F472B6" stroke-width="2" />
+    <text x="620" y="130" fill="#F8FAFC" font-size="18" font-family="'Inter',sans-serif">Experience Layer</text>
+    <text x="620" y="160" fill="#94A3B8" font-size="14" font-family="'Inter',sans-serif">assets/js/components + data</text>
+    <text x="620" y="190" fill="#CBD5F5" font-size="13" font-family="'Inter',sans-serif">• UI render helpers</text>
+    <text x="620" y="210" fill="#CBD5F5" font-size="13" font-family="'Inter',sans-serif">• Curated examples</text>
+    <text x="620" y="230" fill="#CBD5F5" font-size="13" font-family="'Inter',sans-serif">• Main orchestration</text>
+  </g>
+</svg>

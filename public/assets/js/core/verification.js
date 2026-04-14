@@ -21,10 +21,15 @@ function buildTestSuite(maxLen) {
   return suite;
 }
 
-export function verifyEquivalence(pattern1, pattern2) {
+export async function verifyEquivalence(pattern1, pattern2, onProgress = () => {}) {
   const regex1 = new RegExp(`^${sanitizeForRegExp(pattern1)}$`);
   const regex2 = new RegExp(`^${sanitizeForRegExp(pattern2)}$`);
-  for (const candidate of UNIVERSAL_SUITE) {
+  for (let index = 0; index < UNIVERSAL_SUITE.length; index += 1) {
+    const candidate = UNIVERSAL_SUITE[index];
+    onProgress(candidate, index, UNIVERSAL_SUITE.length);
+    if (index % 20 === 0) {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    }
     const match1 = regex1.test(candidate);
     const match2 = regex2.test(candidate);
     if (match1 !== match2) {
