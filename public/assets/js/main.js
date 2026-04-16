@@ -200,21 +200,3 @@ if (generateExampleBtn) {
 
 // Kick off with the pre-loaded example in the inputs.
 safeAnalyze();
-
-// View Switching Logic
-const tryLabBtn = document.getElementById('tryLabBtn');
-const backToHomeBtn = document.getElementById('backToHomeBtn');
-const homeView = document.getElementById('homeView');
-const labView = document.getElementById('labView');
-
-if (tryLabBtn && backToHomeBtn && homeView && labView) {
-  tryLabBtn.addEventListener('click', () => {
-    homeView.classList.add('hidden');
-    labView.classList.remove('hidden');
-  });
-  
-  backToHomeBtn.addEventListener('click', () => {
-    labView.classList.add('hidden');
-    homeView.classList.remove('hidden');
-  });
-}
