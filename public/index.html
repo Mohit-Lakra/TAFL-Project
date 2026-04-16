@@ -100,6 +100,99 @@
       </section>
     </main>
   </div>
+  </div> <!-- Close labView -->
+
+  <script type="module" src="./assets/js/main.js"></script>
+</body>
+</html>
+ation and curated string synthesis. Built for theory enthusiasts who expect mathematical clarity and modern ergonomics.</p>
+    </header>
+
+    <div id="alert" class="hidden border border-rose-500/40 text-rose-200 bg-rose-900/30 rounded-xl px-4 py-3 text-sm"></div>
+
+    <main class="grid gap-6 lg:grid-cols-3">
+      <section class="bg-slate-900/70 border border-slate-800 rounded-2xl shadow-2xl shadow-slate-950/40 p-6 space-y-6">
+        <div class="space-y-4">
+          <label class="block text-sm font-semibold tracking-wide text-slate-300">Regex 1</label>
+          <input id="regex1" type="text" spellcheck="false" placeholder="e.g., (a|b)*a" value="(ab|ε)(ab)*"
+            class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 focus:border-sky-500 focus:ring-2 focus:ring-sky-600 outline-none transition" />
+        </div>
+        <div class="space-y-4">
+          <label class="block text-sm font-semibold tracking-wide text-slate-300">Regex 2</label>
+          <input id="regex2" type="text" spellcheck="false" placeholder="e.g., (aa|ba)b*" value="(ab)*"
+            class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 focus:border-sky-500 focus:ring-2 focus:ring-sky-600 outline-none transition" />
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-[0.4em] text-slate-500 mb-3">Calculator Palette</p>
+          <div class="grid grid-cols-7 gap-2">
+            <button type="button" data-token="(" class="palette-btn">(</button>
+            <button type="button" data-token=")" class="palette-btn">)</button>
+            <button type="button" data-token="|" class="palette-btn">|</button>
+            <button type="button" data-token="*" class="palette-btn">*</button>
+            <button type="button" data-token="a" class="palette-btn">a</button>
+            <button type="button" data-token="b" class="palette-btn">b</button>
+            <button type="button" data-token="ε" class="palette-btn">ε</button>
+          </div>
+        </div>
+        <button id="analyze" class="w-full bg-gradient-to-r from-sky-500 via-cyan-500 to-emerald-400 hover:opacity-95 text-slate-950 font-semibold py-3 rounded-xl shadow-lg shadow-sky-900/50 transition">Analyze &amp; Verify</button>
+        <p class="text-xs text-slate-500">Alphabet restricted to {a, b}. Use ε for the empty string. Concatenation is implicit.</p>
+        <div class="bg-slate-950/40 border border-slate-900/80 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <p class="text-sm font-semibold text-slate-200">Curated Examples</p>
+              <p id="exampleNote" class="text-xs text-slate-500">50% equivalent / 50% non-equivalent cases.</p>
+            </div>
+            <button id="generateExample" type="button" class="shrink-0 px-3 py-2 text-xs font-semibold rounded-xl border border-sky-600 text-slate-100 bg-sky-600/10 hover:bg-sky-600/30 transition">Generate Example</button>
+          </div>
+          <div id="exampleList" class="scroll-panel max-h-48 overflow-y-auto space-y-2 text-sm"></div>
+        </div>
+      </section>
+
+      <section class="bg-slate-900/70 border border-slate-800 rounded-2xl shadow-2xl shadow-slate-950/40 p-6 space-y-4">
+        <h2 class="text-lg font-semibold text-slate-200">Generated Strings (≤ 5 symbols)</h2>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+          <div class="bg-slate-950/40 border border-slate-800 rounded-xl p-4 flex flex-col">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-slate-300">Regex 1</span>
+              <span class="text-xs px-2 py-1 bg-slate-800/80 rounded-full text-slate-400" id="count1">0 strings</span>
+            </div>
+            <div id="strings1" class="scroll-panel overflow-y-auto space-y-1 text-sm pr-1 h-64"></div>
+          </div>
+          <div class="bg-slate-950/40 border border-slate-800 rounded-xl p-4 flex flex-col">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-slate-300">Regex 2</span>
+              <span class="text-xs px-2 py-1 bg-slate-800/80 rounded-full text-slate-400" id="count2">0 strings</span>
+            </div>
+            <div id="strings2" class="scroll-panel overflow-y-auto space-y-1 text-sm pr-1 h-64"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-gradient-to-b from-slate-900/70 to-slate-900/40 border border-slate-800 rounded-2xl shadow-2xl shadow-slate-950/40 p-6 flex flex-col gap-4">
+        <div id="statusCard" class="rounded-2xl border border-slate-800 bg-slate-950/60 p-6 text-center space-y-3">
+          <p class="text-xs uppercase tracking-[0.5em] text-slate-500">Status</p>
+          <p id="statusText" class="text-2xl font-semibold text-slate-200">Awaiting analysis</p>
+          <p id="statusDetail" class="text-sm text-slate-400">Provide both expressions and run the analyzer.</p>
+          <div id="progressTicker" class="analysis-ticker hidden">
+            <span class="pulse-dot"></span>
+            <div class="text-left">
+              <p id="progressLabel" class="text-sm font-semibold text-slate-200">Idle</p>
+              <p id="progressMeta" class="text-xs text-slate-500">Waiting for input</p>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <p class="text-[0.6rem] uppercase tracking-[0.4em] text-slate-500">Length sweep</p>
+            <div id="progressStack" class="stack-bars"></div>
+          </div>
+        </div>
+        <div class="border border-slate-800 rounded-2xl bg-slate-950/30 p-5 space-y-3">
+          <p class="text-sm font-semibold text-slate-300">Counter-example (if any)</p>
+          <p id="counterExample" class="text-lg font-mono text-center text-amber-300 tracking-wide">—</p>
+          <p class="text-xs text-slate-500 text-center">Bounded suite covers every string over {a,b} with length ≤ 8.</p>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <script type="module" src="./assets/js/main.js"></script>
 </body>
